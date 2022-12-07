@@ -20,7 +20,7 @@ import com.example.projekat.service.JwtUserDetailsService;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin("http://localhost:8080")
 public class JwtAuthenticationController {
 
 	@Autowired

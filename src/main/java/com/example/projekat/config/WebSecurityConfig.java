@@ -3,6 +3,7 @@ package com.example.projekat.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -53,8 +54,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// We don't need CSRF for this example
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/authenticate").permitAll().
-				//antMatchers("/proba").permitAll().
+				.authorizeRequests().antMatchers("/authenticate", "/v2/api-docs", "/swagger-ui").permitAll()
+				//antMatchers("/swagger-ui").permitAll().
+				.antMatchers(HttpMethod.GET,"/swagger-resources/**").permitAll()
+		        .antMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
+		        .antMatchers(HttpMethod.GET,"/v2/api-docs").permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().
 				// make sure we use stateless session; session won't be used to
@@ -63,6 +67,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Add a filter to validate the tokens with every request
+		httpSecurity.cors();
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
+	
+
 }
