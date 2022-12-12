@@ -36,7 +36,7 @@ public class SwaggerConfiguration {
                 "Spring Boot Blog REST API Documentation",
                 "1",
                 "Terms of service",
-                new Contact("Ramesh Fadatare", "www.javaguides.net", "ramesh@gmail.com"),
+                new Contact("Tamara Drazic", "www.javaguides.net", "tamaradrazic@gmail.com"),
                 "License of API",
                 "API license URL",
                 Collections.emptyList()
