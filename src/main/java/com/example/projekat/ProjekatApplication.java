@@ -18,4 +18,6 @@ public class ProjekatApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ProjekatApplication.class);
     }
+	
+	private static Class<ProjekatApplication> applicationClass = ProjekatApplication.class;
 }
