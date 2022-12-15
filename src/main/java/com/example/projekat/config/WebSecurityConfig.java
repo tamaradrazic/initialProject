@@ -1,6 +1,12 @@
 package com.example.projekat.config;
 
+import org.apache.catalina.Context;
+import org.apache.catalina.connector.Connector;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -48,17 +54,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
+
 //proveri da li trazi token ukoliko stavim permit na taj path!
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// We don't need CSRF for this example
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
-				.authorizeRequests().antMatchers("/authenticate", "/withCode", "/register", "/v2/api-docs", "/swagger-ui").permitAll()
-				.antMatchers(HttpMethod.GET,"/swagger-resources/**").permitAll()
-		        .antMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
-		        .antMatchers(HttpMethod.GET,"/v2/api-docs").permitAll().
-		        antMatchers(HttpMethod.GET,"/withCode").permitAll().
+				.authorizeRequests()
+				.antMatchers("/authenticate", "/withCode", "/probaTomcat", "/register", "/v2/api-docs", "/swagger-ui",
+						"/uploadImage", "/paginationXML", "/paginationAndSorting", "/pageable","/sorting", "/searchAndPaging")
+				.permitAll().antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll().antMatchers(HttpMethod.GET, "/v2/api-docs")
+				.permitAll().antMatchers(HttpMethod.GET, "/withCode").permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().
 				// make sure we use stateless session; session won't be used to
@@ -70,6 +78,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.cors();
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
-	
-
 }
