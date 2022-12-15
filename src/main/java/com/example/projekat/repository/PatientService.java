@@ -44,4 +44,9 @@ public class PatientService implements IPatientService{
 		Page<Patient> page = pr.findAllPatientByAge(age, paging);
 		return page.toList();
 	}
+
+	@Override
+	public Page<Patient> findPageable(Pageable pageable) {
+		return pr.findPatient(pageable);
+	}
 }

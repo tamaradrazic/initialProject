@@ -18,4 +18,7 @@ public interface PatientRepository extends PagingAndSortingRepository<Patient, I
 	List<Patient> findPatientByAge(@Param("age")int age);
 
 	Page<Patient> findAllPatientByAge(int age, Pageable paging);
+	
+	@Query("select p from Patient p")
+	Page<Patient> findPatient(Pageable paging);
 }

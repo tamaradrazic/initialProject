@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// dont authenticate this particular request
 				.authorizeRequests()
 				.antMatchers("/authenticate", "/withCode", "/probaTomcat", "/register", "/v2/api-docs", "/swagger-ui",
-						"/uploadImage", "/paginationXML", "/paginationAndSorting", "/sorting", "/searchAndPaging")
+						"/uploadImage", "/paginationXML", "/paginationAndSorting", "/pageable","/sorting", "/searchAndPaging")
 				.permitAll().antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll().antMatchers(HttpMethod.GET, "/v2/api-docs")
 				.permitAll().antMatchers(HttpMethod.GET, "/withCode").permitAll().
