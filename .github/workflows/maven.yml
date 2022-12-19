@@ -10,7 +10,7 @@ name: Java CI with Maven
 
 on:
   pull_request:
-    types: [ "main" ]
+    types: [closed]
   
 
 jobs:
