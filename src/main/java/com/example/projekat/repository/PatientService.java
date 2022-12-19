@@ -49,4 +49,9 @@ public class PatientService implements IPatientService{
 	public Page<Patient> findPageable(Pageable pageable) {
 		return pr.findPatient(pageable);
 	}
+
+	@Override
+	public List<Patient> findSorted(Sort sorted) {
+		return pr.findSorted(sorted);
+	}
 }

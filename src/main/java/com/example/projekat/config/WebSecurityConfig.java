@@ -56,14 +56,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 //proveri da li trazi token ukoliko stavim permit na taj path!
+	//"/uploadImage", "/paginationXML", "/paginationAndSorting", "/pageable","/sorting", "/sorted","/searchAndPaging"
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// We don't need CSRF for this example
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests()
-				.antMatchers("/authenticate", "/withCode", "/probaTomcat", "/register", "/v2/api-docs", "/swagger-ui",
-						"/uploadImage", "/paginationXML", "/paginationAndSorting", "/pageable","/sorting", "/searchAndPaging")
+				.antMatchers("/authenticate", "/withCode", "/probaTomcat", "/register", "/v2/api-docs", "/swagger-ui"
+						)
 				.permitAll().antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll().antMatchers(HttpMethod.GET, "/v2/api-docs")
 				.permitAll().antMatchers(HttpMethod.GET, "/withCode").permitAll().
