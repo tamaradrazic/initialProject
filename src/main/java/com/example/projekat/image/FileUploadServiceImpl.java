@@ -21,10 +21,10 @@ public class FileUploadServiceImpl implements FileUploadService{
 	private Logger logger = LoggerFactory.getLogger(FileUploadServiceImpl.class);
 	
 	@Override
-	public File upload(MultipartFile imageFile) {
+	public File upload(MultipartFile image) {
 		try {
-			Path path = Paths.get(imageFolder, imageFile.getOriginalFilename());
-			Files.write(path, imageFile.getBytes());
+			Path path = Paths.get(imageFolder, image.getOriginalFilename());
+			Files.write(path, image.getBytes());
 			return path.toFile();
 		}catch(IOException e) {
 			logger.error(e.getMessage(), e);

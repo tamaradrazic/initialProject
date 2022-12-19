@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.example.projekat.entities.Patient;
 
@@ -16,4 +17,5 @@ public interface IPatientService {
 	List<Patient> searchAndPaging(int pageNo, int pageSize, int age);
 	
 	Page<Patient> findPageable(Pageable pageable);
+	List<Patient> findSorted(Sort sorted);
 }

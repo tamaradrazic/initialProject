@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -21,4 +22,7 @@ public interface PatientRepository extends PagingAndSortingRepository<Patient, I
 	
 	@Query("select p from Patient p")
 	Page<Patient> findPatient(Pageable paging);
+	
+	@Query("select p from Patient p")
+	List<Patient> findSorted(Sort sorted);
 }
