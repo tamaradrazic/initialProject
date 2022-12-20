@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.projekat.repository.PatientRepository;
-import com.example.projekat.service.PatientService;
+import com.example.projekat.service.PatientServ;
 
 @ExtendWith(MockitoExtension.class)
 public class PatientServiceTest {
@@ -17,12 +17,12 @@ public class PatientServiceTest {
 	@Mock 
 	private PatientRepository pr;
 	
-	private PatientService patientService;
+	private PatientServ patientService;
 	
 	@BeforeEach 
 	void setUp() {
         this.patientService
-            = new PatientService(this.pr);
+            = new PatientServ(this.pr);
     }
 	
 	@Test 

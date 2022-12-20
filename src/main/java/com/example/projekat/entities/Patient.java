@@ -30,6 +30,12 @@ public class Patient {
 	@Column(name = "email")
 	private String email;
 	
+	@Column(name = "weight")
+	private double weight;
+	
+	@Column(name = "heigth")
+	private double height;
+	
 	public Patient() {
 		
 	}
@@ -81,8 +87,25 @@ public class Patient {
 		this.email = email;
 	}
 
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
 	@Override
 	public String toString() {
-		return "Patient [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", email=" + email + "]";
+		return "Patient [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", email="
+				+ email + ", weight=" + weight + ", height=" + height + "]";
 	}
 }

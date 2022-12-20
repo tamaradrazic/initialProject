@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests()
-				.antMatchers("/authenticate", "/withCode", "/probaTomcat", "/register", "/v2/api-docs", "/swagger-ui"
+				.antMatchers("/authenticate", "/withCode", "/probaTomcat", "/transformHeight","/register", "/v2/api-docs", "/swagger-ui"
 						)
 				.permitAll().antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll().antMatchers(HttpMethod.GET, "/v2/api-docs")

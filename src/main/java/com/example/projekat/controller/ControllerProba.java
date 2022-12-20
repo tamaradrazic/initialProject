@@ -17,7 +17,7 @@ import com.example.projekat.entities.Patient;
 import com.example.projekat.repository.IPatientService;
 import com.example.projekat.repository.PatientRepository;
 import com.example.projekat.repository.UserRepository;
-import com.example.projekat.service.PatientService;
+import com.example.projekat.service.PatientServ;
 
 @RestController
 @CrossOrigin("http://localhost:8080")
@@ -33,7 +33,7 @@ public class ControllerProba {
 	IPatientService patientService;
 	
 	@Autowired
-    private PatientService personService;
+    private PatientServ personService;
  
 
 	@RequestMapping("/proba")
@@ -83,5 +83,26 @@ public class ControllerProba {
 	@RequestMapping(value = "/searchAndPaging")
 	public List<Patient> searchAndPaging(@RequestParam(name="pageNo") int pageNo, @RequestParam(name="pageSize") int pageSize, @RequestParam(name="age") int age){
 		return patientService.searchAndPaging(pageNo, pageSize, age);
+	}
+	
+	@RequestMapping(value = "/transformHeight")
+	public double getTransformed(@RequestParam(name="id")int id, @RequestParam(name="unit") String unit) {
+		
+		Patient p = pr.findPatientById(id);
+		if(p != null) {
+			if(unit.equals("m")) {
+				return p.getHeight();
+			}
+			else if(unit.equals("cm")) {
+				return p.getHeight() * 100;
+			}
+			else if(unit.equals("in")) {
+				return p.getHeight() * 39.37007874;
+			}
+			else if(unit.equals("ft")) {
+				return p.getHeight() * 3.2808399;
+			}
+		}
+		return 0;
 	}
 }
