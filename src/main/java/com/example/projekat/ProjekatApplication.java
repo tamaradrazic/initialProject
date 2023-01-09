@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
@@ -14,10 +15,14 @@ public class ProjekatApplication extends SpringBootServletInitializer {
 		SpringApplication.run(ProjekatApplication.class, args);
 	}
 
+//	@Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//        return application.sources(ProjekatApplication.class);
+//    }
+//	
+//	private static Class<ProjekatApplication> applicationClass = ProjekatApplication.class;
 	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(ProjekatApplication.class);
-    }
-	
-	private static Class<ProjekatApplication> applicationClass = ProjekatApplication.class;
+	  protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+	      return builder.sources(ProjekatApplication.class);
+	  }
 }

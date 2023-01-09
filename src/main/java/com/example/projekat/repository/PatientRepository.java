@@ -25,4 +25,10 @@ public interface PatientRepository extends PagingAndSortingRepository<Patient, I
 	
 	@Query("select p from Patient p")
 	List<Patient> findSorted(Sort sorted);
+	
+	@Query("select p from Patient p where p.id = :id")
+	Patient findPatientById(@Param("id")int id);
+	
+	@Query("select p from Patient p where p.firstName = :firstName and p.lastName = :lastName")
+	Patient findPatientsWithSameName(@Param("firstName")String firstName, @Param("lastName")String lastName);
 }

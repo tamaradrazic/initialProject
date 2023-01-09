@@ -1,0 +1,4 @@
+--INSERT INTO project . patient (firstName, lastName, age, email, first_name, last_name, weight, heigth, heigth, date) VALUES ('test123', 'test123', '123', 'test@test123', 'test123', 'test123', '76', '1.88', '1.88', '2024-02-12');
+INSERT INTO patient (firstName, lastName, age, email, first_name, last_name, weight, height, heigth, date) VALUES ('proba123', 'proba123', '32', 'proba123', 'proba123', 'proba123', '44', '44', '44', '2022-12-28');
+INSERT INTO user (password, username, email, firstName, lastName, active, code, first_name, last_name, secret, roleId, role_id, status) VALUES
+					('testDodavanjaDSQL', 'testDodavanjaDSQL', 'testDodavanjaDSQL', 'testDodavanjaDSQL', 'testDodavanjaDSQL', '0', '009099', 'testDodavanjaDSQL', 'testDodavanjaDSQL', '', '1', '1', '');

@@ -5,44 +5,53 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity		
-@Table(name="user")
+@Entity
+@Table(name = "user")
 public class UserEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-    private Integer id;
-	
-	@Column(name="username")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Integer id;
+
+	@Column(name = "username")
 	private String username;
-	
-	@Column(name="password")
+
+	@Column(name = "status")
+	private Boolean status;
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="firstName")
+
+	@Column(name = "firstName")
 	private String firstName;
-	
-	@Column(name="lastName")
+
+	@Column(name = "lastName")
 	private String lastName;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="active")
+
+	@Column(name = "active")
 	private boolean active;
-	
-	@Column(name="code")
+
+	@Column(name = "code")
 	private String code;
-	
+
 	private String secret;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "roleId")
+	private UserRole role;
+
 	public UserEntity() {
-		
+
 	}
-	
+
 	public UserEntity(String username, String password) {
 		this.username = username;
 		this.password = password;
@@ -71,9 +80,17 @@ public class UserEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	public void setFirstName(String firstName) {
@@ -104,6 +121,14 @@ public class UserEntity {
 		this.active = active;
 	}
 
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -118,6 +143,14 @@ public class UserEntity {
 
 	public void setSecret(String secret) {
 		this.secret = secret;
+	}
+
+	public UserRole getUserRoleId() {
+		return role;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.role = userRole;
 	}
 
 	@Override
