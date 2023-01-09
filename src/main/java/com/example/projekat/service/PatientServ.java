@@ -13,14 +13,12 @@ public class PatientServ {
 
 	@Autowired
 	PatientRepository pr;
-	
-	public List<Patient> getAll(){
+
+	public List<Patient> getAll() {
 		return (List<Patient>) pr.findAll();
 	}
-	
-	public PatientServ(PatientRepository pr)
-    {
-        // this keyword refers to current instance
-        this.pr = pr;
-    }
+
+	public PatientServ(PatientRepository pr) {
+		this.pr = pr;
+	}
 }
