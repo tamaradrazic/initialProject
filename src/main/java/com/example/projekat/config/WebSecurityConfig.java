@@ -60,23 +60,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// We don't need CSRF for this example
-		httpSecurity.csrf().disable()
+		httpSecurity.csrf().disable().httpBasic().disable().cors().and()
 				// dont authenticate this particular request
 				.authorizeRequests()
-				.antMatchers("/authenticate", "/withCode", "/probaTomcat", "/register", "/v2/api-docs", "/swagger-ui"
+				.antMatchers("/csv/**","/registration/**", "/images/**", "/proba/**", "/auth/**", "/getPatientById","/verify", "/createUserByAdmin", "/getRoles", "/paginationPatients","/getPatients","/authenticate", "/withCode", "/probaTomcat", "/transformHeight","/register", "/v2/api-docs", "/swagger-ui"
 						)
 				.permitAll().antMatchers(HttpMethod.GET, "/swagger-resources/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll().antMatchers(HttpMethod.GET, "/v2/api-docs")
 				.permitAll().antMatchers(HttpMethod.GET, "/withCode").permitAll().
 				// all other requests need to be authenticated
-				anyRequest().authenticated().and().
+				anyRequest().authenticated().and()
+				.userDetailsService(jwtUserDetailsService).
+				
 				// make sure we use stateless session; session won't be used to
 				// store user's state.
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Add a filter to validate the tokens with every request
-		httpSecurity.cors();
+//		httpSecurity.cors();
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 }

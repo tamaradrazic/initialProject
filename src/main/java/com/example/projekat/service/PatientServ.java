@@ -9,18 +9,16 @@ import com.example.projekat.entities.Patient;
 import com.example.projekat.repository.PatientRepository;
 
 @Service
-public class PatientService {
+public class PatientServ {
 
 	@Autowired
 	PatientRepository pr;
-	
-	public List<Patient> getAll(){
+
+	public List<Patient> getAll() {
 		return (List<Patient>) pr.findAll();
 	}
-	
-	public PatientService(PatientRepository pr)
-    {
-        // this keyword refers to current instance
-        this.pr = pr;
-    }
+
+	public PatientServ(PatientRepository pr) {
+		this.pr = pr;
+	}
 }

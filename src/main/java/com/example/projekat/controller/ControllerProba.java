@@ -1,5 +1,6 @@
 package com.example.projekat.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projekat.entities.Patient;
+import com.example.projekat.entities.UserRole;
 import com.example.projekat.repository.IPatientService;
 import com.example.projekat.repository.PatientRepository;
 import com.example.projekat.repository.UserRepository;
-import com.example.projekat.service.PatientService;
+import com.example.projekat.repository.UserRoleRepository;
+import com.example.projekat.service.PatientServ;
 
+@CrossOrigin("*")
 @RestController
-@CrossOrigin("http://localhost:8080")
+@RequestMapping("/proba")
 public class ControllerProba {
 
 	@Autowired
@@ -33,18 +37,16 @@ public class ControllerProba {
 	IPatientService patientService;
 	
 	@Autowired
-    private PatientService personService;
+	UserRoleRepository urr;
+	
+	@Autowired
+    private PatientServ personService;
  
 
 	@RequestMapping("/proba")
 	public String proba() {
 		return "prolazi";
 	}
-	
-//	@RequestMapping("/probaTomcat")
-//	public String probaTomcat() {
-//		return "probaTomcat";
-//	}
 	
 	public List<Patient> getAll(){
 		return (List<Patient>) pr.findAll();
@@ -55,8 +57,18 @@ public class ControllerProba {
 		return ResponseEntity.ok(personService.getAll());
 	}
 	
+	@RequestMapping("/getPatients")
+	public List<Patient> getPatients(){
+		return personService.getAll();
+	}
+	
 	@RequestMapping(value = "/paginationXML", produces = {MediaType.APPLICATION_XML_VALUE}, headers = "Accept=application/xml")
 	public List<Patient> getPaginatedPatients(@RequestParam(name="pageNo") int pageNo, @RequestParam(name="pageSize") int pageSize) {
+		return patientService.findPaginated(pageNo, pageSize);
+	}
+	
+	@RequestMapping(value = "/paginationPatients")
+	public List<Patient> getPaginatedPatientsJSON(@RequestParam(name="pageNo") int pageNo, @RequestParam(name="pageSize") int pageSize) {
 		return patientService.findPaginated(pageNo, pageSize);
 	}
 	
@@ -83,5 +95,36 @@ public class ControllerProba {
 	@RequestMapping(value = "/searchAndPaging")
 	public List<Patient> searchAndPaging(@RequestParam(name="pageNo") int pageNo, @RequestParam(name="pageSize") int pageSize, @RequestParam(name="age") int age){
 		return patientService.searchAndPaging(pageNo, pageSize, age);
+	}
+	
+	@RequestMapping(value = "/transformHeight")
+	public double getTransformed(@RequestParam(name="id")int id, @RequestParam(name="unit") String unit) {
+		
+		Patient p = pr.findPatientById(id);
+		if(p != null) {
+			if(unit.equals("m")) {
+				return p.getHeight();
+			}
+			else if(unit.equals("cm")) {
+				return p.getHeight() * 100;
+			}
+			else if(unit.equals("in")) {
+				return p.getHeight() * 39.37007874;
+			}
+			else if(unit.equals("ft")) {
+				return p.getHeight() * 3.2808399;
+			}
+		}
+		return 0;
+	}
+	
+	@RequestMapping(value="/getRoles")
+	public List<String> getRoles(){
+		List<UserRole> roles = urr.findAll();
+		List<String> names = new ArrayList<>();
+		for (UserRole role : roles) {
+			names.add(role.getName());
+		}
+		return names;
 	}
 }
